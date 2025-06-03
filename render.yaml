@@ -1,0 +1,26 @@
+databases:
+  - name: fire-door-oa-db
+    databaseName: fire_door_oa
+    user: fire_door_oa_user
+    plan: free
+
+services:
+  - type: web
+    name: fire-door-oa
+    env: python
+    plan: free
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && gunicorn fire_door_oa.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: fire-door-oa-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: False
+      - key: RENDER
+        value: True
+      - key: PYTHON_VERSION
+        value: 3.9.18
