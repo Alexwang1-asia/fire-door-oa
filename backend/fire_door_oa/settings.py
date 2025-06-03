@@ -6,7 +6,7 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # 安全密钥
-SECRET_KEY = config('SECRET_KEY', default='django-insecure-default-key-change-in-production')
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-xyz123abc456def789ghi')
 
 # 调试模式
 DEBUG = config('DEBUG', default=True, cast=bool)
